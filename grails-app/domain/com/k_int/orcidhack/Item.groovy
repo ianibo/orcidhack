@@ -1,8 +1,9 @@
 package com.k_int.orcidhack
 
-class Org {
+class Item {
 
-    String name
+  String oaiId
+  String title
 
     static constraints = {
     }

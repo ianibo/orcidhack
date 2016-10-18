@@ -1,8 +1,9 @@
 package com.k_int.orcidhack
 
-class Org {
+class NameOccurrence {
 
-    String name
+  Item item
+  Person person
 
     static constraints = {
     }

@@ -24,6 +24,33 @@ class BootStrap {
         }
       }
 
+      def shu_repo = Repository.findByName('shu')
+      if ( shu_repo == null ) {
+        shu_repo = new Repository(name:'shu',baseUrl:'http://shura.shu.ac.uk/cgi/oai2').save(flush:true, failOnError:true);
+      }
+
+      def org_shu = Org.findByName('shu')
+      if ( org_shu == null ) {
+        org_shu = new Org(name:'shu').save(flush:true, failOnError:true)
+      }
+
+      def person_acesii = Person.findByPersId('acesii')
+      if ( person_acesii == null ) {
+        person_acesii = new Person(persId:'acesii', name:'IBBOTSON, Ian').save(flush:true, failOnError:true)
+        def pao = new PersonOrgAffiliation(person:person_acesii, org:org_shu).save(flush:true, failOnError:true);
+      }
+
+      def item = Item.findByOaiId('oai:shura.shu.ac.uk:12191')
+      if ( item == null ) {
+        item = new Item(
+                        oaiId:'oai:shura.shu.ac.uk:12191', 
+                        title:'Nifty with data: can a business intelligence analysis sourced from open data form a nifty assignment?').save(flush:true, failOnError:true)
+
+        def nameOccurrence = new NameOccurrence(
+                                            item:item, 
+                                            person:person_acesii, 
+                                            name:'IBBOTSON, Ian').save(flush:true, failOnError:true)
+      }
 
 
     }
